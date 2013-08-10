@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Answers</h1>
+<h3>Question: {{question.text}}</h3>
+<table class="table table-striped">
+{% for answer in question.answers %}
+    <tr>
+        <td>{{answer.data}}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -9,10 +9,14 @@ Male or Female?"""
 
 from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.basicauth import BasicAuth
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///questions.db'
+app.config['BASIC_AUTH_USERNAME'] = 'admin'
+app.config['BASIC_AUTH_PASSWORD'] = 'billmedude'
 
+basic_auth = BasicAuth(app)
 db = SQLAlchemy(app)
 
 
@@ -45,6 +49,18 @@ def get_answers():
         # print "%s => %s" % (, request.form.get(x))
     db.session.commit()
     return render_template('thanks.html')
+
+@app.route('/questions')
+@basic_auth.required
+def questions():
+    questions = Question.query.all()
+    return render_template('questions_index.html', questions=questions)
+
+@app.route('/questions/<int:id>')
+@basic_auth.required
+def questions_show(id):
+    question = Question.query.filter(Question.id==id).one()
+    return render_template('questions_show.html', question=question)
 
 def reset_db():
     db.drop_all()
