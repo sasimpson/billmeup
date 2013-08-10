@@ -42,7 +42,7 @@ def get_answers():
         db.session.add(answer)
         # print "%s => %s" % (, request.form.get(x))
     db.session.commit()
-    return "Thanks!"
+    return render_template('thanks.html')
 
 def reset_db():
     db.drop_all()
