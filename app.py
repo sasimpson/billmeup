@@ -3,7 +3,9 @@ How much time do you spend on paying bills?
 How do you pay them (online, autopay, snail mail)? 
 What part of the process do you like?
 What part do you not like?
-Have you ever had a billing mistake and how did you catch it?"""
+Have you ever had a billing mistake and how did you catch it?
+How old are you?
+Male or Female?"""
 
 from flask import Flask, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
