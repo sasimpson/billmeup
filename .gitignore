@@ -1,3 +1,5 @@
 *.py[c|o]
 *.db
 *.sqlite
+*.txt
+*.tar
