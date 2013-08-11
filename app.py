@@ -34,11 +34,11 @@ class Answer(db.Model):
 
 
 @app.route('/')
+@app.route('/survey', methods=["POST"])
 def index():
     questions = Question.query.all()
-    return render_template('index.html', questions=questions)
+    return render_template('thanks.html', questions=questions)
 
-@app.route('/survey', methods=["POST"])
 def get_answers():
     # print request.form
     for x in request.form.keys():
@@ -61,6 +61,10 @@ def questions():
 def questions_show(id):
     question = Question.query.filter(Question.id==id).one()
     return render_template('questions_show.html', question=question)
+
+@app.route('/mockup')
+def mockup_index():
+    return render_template('mockup/index.html')
 
 def reset_db():
     db.drop_all()
